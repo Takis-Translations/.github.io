@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Θεόδωρος Τάκης - Επαγγελματίας Μεταφραστής</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: slideUp 0.8s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: sweep 3s infinite;
+        }
+        
+        @keyframes sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .profile-section {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .title {
+            font-size: 1.3rem;
+            color: #ecf0f1;
+            margin-bottom: 5px;
+        }
+        
+        .languages {
+            font-size: 1rem;
+            color: #bdc3c7;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid;
+        }
+        
+        .stat-card:nth-child(1) { border-top-color: #e74c3c; }
+        .stat-card:nth-child(2) { border-top-color: #3498db; }
+        .stat-card:nth-child(3) { border-top-color: #2ecc71; }
+        .stat-card:nth-child(4) { border-top-color: #f39c12; }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .features {
+            padding: 40px 30px;
+            background: white;
+        }
+        
+        .features h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 1.8rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: #e9ecef;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-text h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-text p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            padding: 50px 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cta-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .email-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .email-btn:hover {
+            background: linear-gradient(45deg, #c0392b, #e74c3c);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.4);
+        }
+        
+        .email-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .flags {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            letter-spacing: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2rem;
+            }
+            
+            .title {
+                font-size: 1.1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="profile-section">
+                <h1 class="name">Θεόδωρος Τάκης</h1>
+                <p class="title">Επαγγελματίας Μεταφραστής</p>
+                <p class="languages">(DE–EN–FR–IT–ES → EL)</p>
+            </div>
+        </div>
+        
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">19</span>
+                <div class="stat-label">Χρόνια Εμπειρίας</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">6</span>
+                <div class="stat-label">Γλώσσες</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">3</span>
+                <div class="stat-label">Μητρικές Γλώσσες</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">12.687</span>
+                <div class="stat-label">Ολοκληρωμένα Έργα</div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features">
+            <h2>Γιατί να με Επιλέξετε;</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🌟</div>
+                    <div class="feature-text">
+                        <h3>Native Speaker 3 Γλωσσών</h3>
+                        <p>Τρίγλωσση ανατροφή με απόλυτη φυσικότητα στα Ελληνικά, Γερμανικά και Αγγλικά</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-text">
+                        <h3>Εξειδικευμένες Μεταφράσεις</h3>
+                        <p>Νομικά, τεχνικά, ιατρικά και επιχειρηματικά κείμενα με υψηλή ακρίβεια</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">
+                        <h3>Γρήγορη Παράδοση</h3>
+                        <p>Αξιόπιστη τήρηση προθεσμιών και άμεση επικοινωνία καθ' όλη τη διαδικασία</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">
+                        <h3>Πλήρης Εμπιστευτικότητα</h3>
+                        <p>Διαφύλαξη όλων των εγγράφων και συνεργασία με μεταφραστικά γραφεία</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">Ξεκινήστε τη Συνεργασία Σήμερα!</h2>
+            <p class="cta-subtitle">Δωρεάν δοκιμαστική μετάφραση για να δείτε την ποιότητα της εργασίας μου</p>
+            
+            <a href="mailto:takis.translations@gmail.com?subject=Αίτημα Συνεργασίας - Υπηρεσίες Μετάφρασης&body=Αξιότιμε κ. Τάκη,%0A%0AΕίδαμε το προφίλ σας και θα θέλαμε να συζητήσουμε μια πιθανή συνεργασία για υπηρεσίες μετάφρασης.%0A%0AΠαρακαλώ επικοινωνήστε μαζί μας για:%0A- Συζήτηση συγκεκριμένων projects%0A- Προσφορά τιμών%0A- Δωρεάν δοκιμαστική μετάφραση%0A%0AΜε εκτίμηση," 
+               class="email-btn">
+                📧 Επικοινωνία για Συνεργασία
+            </a>
+            
+            <div class="contact-info">
+                <p><strong>📧 Email:</strong> takis.translations@gmail.com</p>
+                <p><strong>🌍 Τοποθεσία:</strong> Γερμανία – Συνεργασία με Ελλάδα</p>
+                <p><strong>🤝 Εξειδίκευση:</strong> Συνεργασία με μεταφραστικά γραφεία</p>
+                
+                <div class="flags">🇬🇷 🇩🇪 🇬🇧 🇪🇸 🇫🇷 🇮🇹</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add smooth animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.stat-card');
+            const features = document.querySelectorAll('.feature-item');
+            
+            // Animate stats cards with delay
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 * (index + 1));
+            });
+            
+            // Animate feature items
+            features.forEach((feature, index) => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateX(-30px)';
+                
+                setTimeout(() => {
+                    feature.style.transition = 'all 0.6s ease';
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateX(0)';
+                }, 100 * (index + 1) + 800);
+            });
+            
+            // Add click animation to email button
+            const emailBtn = document.querySelector('.email-btn');
+            emailBtn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
