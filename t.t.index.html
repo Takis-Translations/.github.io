@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Θεόδωρος Τάκης - Επαγγελματίας Μεταφραστής</title>
+    <title>Theodoros Takis - Professional Translator</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -31,20 +31,39 @@
         }
         
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .language-switcher {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 15px 30px;
+            text-align: center;
+        }
+        
+        .lang-btn {
+            padding: 8px 15px;
+            margin: 0 5px;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
         }
         
         .header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 50px 30px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -72,40 +91,57 @@
         }
         
         .name {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #ecf0f1;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         
         .languages {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #bdc3c7;
             font-family: 'Courier New', monospace;
         }
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            padding: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 25px;
+            padding: 40px 30px;
             background: #f8f9fa;
         }
         
         .stat-card {
             background: white;
-            padding: 25px;
+            padding: 30px 25px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-top: 4px solid;
+            border-top: 5px solid;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .stat-card:hover::before {
+            left: 100%;
         }
         
         .stat-card:nth-child(1) { border-top-color: #e74c3c; }
@@ -114,146 +150,249 @@
         .stat-card:nth-child(4) { border-top-color: #f39c12; }
         
         .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
         
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: bold;
             color: #2c3e50;
             display: block;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
         }
         
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #7f8c8d;
-            font-weight: 500;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
         }
         
         .features {
-            padding: 40px 30px;
+            padding: 50px 30px;
             background: white;
         }
         
         .features h2 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             color: #2c3e50;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
+            position: relative;
+        }
+        
+        .features h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #e74c3c);
+            border-radius: 2px;
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             margin-bottom: 40px;
         }
         
         .feature-item {
             display: flex;
             align-items: flex-start;
-            gap: 15px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            transition: background 0.3s ease;
+            gap: 20px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border-left: 5px solid transparent;
         }
         
+        .feature-item:nth-child(1) { border-left-color: #e74c3c; }
+        .feature-item:nth-child(2) { border-left-color: #3498db; }
+        .feature-item:nth-child(3) { border-left-color: #2ecc71; }
+        .feature-item:nth-child(4) { border-left-color: #f39c12; }
+        
         .feature-item:hover {
-            background: #e9ecef;
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            transform: translateX(10px);
         }
         
         .feature-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             flex-shrink: 0;
         }
         
         .feature-text h3 {
             color: #2c3e50;
-            margin-bottom: 5px;
-            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
         
         .feature-text p {
             color: #6c757d;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            line-height: 1.6;
         }
         
         .cta-section {
             background: linear-gradient(135deg, #3498db, #2980b9);
-            padding: 50px 30px;
+            padding: 60px 30px;
             text-align: center;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(255,255,255,0.03) 20px,
+                rgba(255,255,255,0.03) 40px
+            );
+            animation: float 10s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
         }
         
         .cta-title {
-            font-size: 2rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
         }
         
         .cta-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .email-btn {
             background: linear-gradient(45deg, #e74c3c, #c0392b);
             color: white;
-            padding: 18px 40px;
+            padding: 20px 50px;
             border: none;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.4);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .email-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .email-btn:hover::before {
+            left: 100%;
         }
         
         .email-btn:hover {
-            background: linear-gradient(45deg, #c0392b, #e74c3c);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.4);
+            background: linear-gradient(45deg, #c0392b, #a93226);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.5);
         }
         
         .email-btn:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
         
         .contact-info {
-            margin-top: 30px;
+            margin-top: 40px;
             padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .contact-info p {
+            margin: 8px 0;
         }
         
         .flags {
-            font-size: 1.5rem;
-            margin-top: 15px;
-            letter-spacing: 5px;
+            font-size: 1.8rem;
+            margin-top: 20px;
+            letter-spacing: 8px;
+        }
+        
+        .url-display {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         /* Responsive */
         @media (max-width: 768px) {
+            .header {
+                padding: 30px 20px;
+            }
+            
             .name {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .title {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-                padding: 20px;
+                padding: 30px 20px;
+                gap: 20px;
+            }
+            
+            .features {
+                padding: 40px 20px;
             }
             
             .features-grid {
@@ -261,19 +400,43 @@
             }
             
             .cta-title {
-                font-size: 1.5rem;
+                font-size: 2rem;
+            }
+            
+            .cta-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .language-switcher {
+                padding: 10px 15px;
+            }
+            
+            .lang-btn {
+                padding: 6px 10px;
+                margin: 2px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <span class="lang-btn">🇬🇧 English</span>
+            <span class="lang-btn">🇩🇪 Deutsch</span>
+            <span class="lang-btn">🇪🇸 Español</span>
+            <span class="lang-btn">🇫🇷 Français</span>
+            <span class="lang-btn">🇮🇹 Italiano</span>
+            <span class="lang-btn">🇬🇷 Ελληνικά</span>
+        </div>
+
         <!-- Header Section -->
         <div class="header">
             <div class="profile-section">
-                <h1 class="name">Θεόδωρος Τάκης</h1>
-                <p class="title">Επαγγελματίας Μεταφραστής</p>
-                <p class="languages">(DE–EN–FR–IT–ES → EL)</p>
+                <h1 class="name">Theodoros Takis</h1>
+                <p class="title">Professional Translator</p>
+                <p class="languages">(EL–DE–FR–IT–ES → EN)</p>
             </div>
         </div>
         
@@ -281,52 +444,52 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <span class="stat-number">19</span>
-                <div class="stat-label">Χρόνια Εμπειρίας</div>
+                <div class="stat-label">Years Experience</div>
             </div>
             <div class="stat-card">
                 <span class="stat-number">6</span>
-                <div class="stat-label">Γλώσσες</div>
+                <div class="stat-label">Languages</div>
             </div>
             <div class="stat-card">
                 <span class="stat-number">3</span>
-                <div class="stat-label">Μητρικές Γλώσσες</div>
+                <div class="stat-label">Native Languages</div>
             </div>
             <div class="stat-card">
-                <span class="stat-number">12.687</span>
-                <div class="stat-label">Ολοκληρωμένα Έργα</div>
+                <span class="stat-number">12,687</span>
+                <div class="stat-label">Completed Projects</div>
             </div>
         </div>
         
         <!-- Features Section -->
         <div class="features">
-            <h2>Γιατί να με Επιλέξετε;</h2>
+            <h2>Why Choose Me?</h2>
             <div class="features-grid">
                 <div class="feature-item">
                     <div class="feature-icon">🌟</div>
                     <div class="feature-text">
-                        <h3>Native Speaker 3 Γλωσσών</h3>
-                        <p>Τρίγλωσση ανατροφή με απόλυτη φυσικότητα στα Ελληνικά, Γερμανικά και Αγγλικά</p>
+                        <h3>Native Speaker of 3 Languages</h3>
+                        <p>Trilingual upbringing with absolute fluency in Greek, German, and English. This rare combination ensures natural, culturally accurate translations without the typical "foreign" elements.</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon">🎯</div>
                     <div class="feature-text">
-                        <h3>Εξειδικευμένες Μεταφράσεις</h3>
-                        <p>Νομικά, τεχνικά, ιατρικά και επιχειρηματικά κείμενα με υψηλή ακρίβεια</p>
+                        <h3>Specialized Translations</h3>
+                        <p>Legal, technical, medical, and business texts with high precision. Expertise across multiple industries ensures accurate terminology and context-appropriate translations.</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon">⚡</div>
                     <div class="feature-text">
-                        <h3>Γρήγορη Παράδοση</h3>
-                        <p>Αξιόπιστη τήρηση προθεσμιών και άμεση επικοινωνία καθ' όλη τη διαδικασία</p>
+                        <h3>Fast & Reliable Delivery</h3>
+                        <p>Consistent deadline adherence and immediate communication throughout the process. Your projects are completed on time, every time, with regular updates.</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon">🔒</div>
                     <div class="feature-text">
-                        <h3>Πλήρης Εμπιστευτικότητα</h3>
-                        <p>Διαφύλαξη όλων των εγγράφων και συνεργασία με μεταφραστικά γραφεία</p>
+                        <h3>Complete Confidentiality</h3>
+                        <p>Full protection of all documents and professional collaboration with translation agencies. Your sensitive information remains secure and confidential.</p>
                     </div>
                 </div>
             </div>
@@ -334,22 +497,29 @@
         
         <!-- CTA Section -->
         <div class="cta-section">
-            <h2 class="cta-title">Ξεκινήστε τη Συνεργασία Σήμερα!</h2>
-            <p class="cta-subtitle">Δωρεάν δοκιμαστική μετάφραση για να δείτε την ποιότητα της εργασίας μου</p>
-            
-            <a href="mailto:takis.translations@gmail.com?subject=Αίτημα Συνεργασίας - Υπηρεσίες Μετάφρασης&body=Αξιότιμε κ. Τάκη,%0A%0AΕίδαμε το προφίλ σας και θα θέλαμε να συζητήσουμε μια πιθανή συνεργασία για υπηρεσίες μετάφρασης.%0A%0AΠαρακαλώ επικοινωνήστε μαζί μας για:%0A- Συζήτηση συγκεκριμένων projects%0A- Προσφορά τιμών%0A- Δωρεάν δοκιμαστική μετάφραση%0A%0AΜε εκτίμηση," 
-               class="email-btn">
-                📧 Επικοινωνία για Συνεργασία
-            </a>
-            
-            <div class="contact-info">
-                <p><strong>📧 Email:</strong> takis.translations@gmail.com</p>
-                <p><strong>🌍 Τοποθεσία:</strong> Γερμανία – Συνεργασία με Ελλάδα</p>
-                <p><strong>🤝 Εξειδίκευση:</strong> Συνεργασία με μεταφραστικά γραφεία</p>
+            <div class="cta-content">
+                <h2 class="cta-title">Start Collaboration Today!</h2>
+                <p class="cta-subtitle">Get a free sample translation to experience the quality and professionalism of my work firsthand</p>
                 
-                <div class="flags">🇬🇷 🇩🇪 🇬🇧 🇪🇸 🇫🇷 🇮🇹</div>
+                <a href="mailto:takis.translations@gmail.com?subject=Collaboration Request - Translation Services&body=Dear Mr. Takis,%0A%0AWe have reviewed your profile and would like to discuss a potential collaboration for translation services.%0A%0APlease contact us to discuss:%0A- Specific project requirements%0A- Pricing and timelines%0A- Free sample translation%0A%0AWe look forward to hearing from you.%0A%0ABest regards," 
+                   class="email-btn">📧 Contact for Collaboration</a>
+                
+                <div class="contact-info">
+                    <p><strong>📧 Email:</strong> takis.translations@gmail.com</p>
+                    <p><strong>🌐 Website:</strong> takis-translations.github.io</p>
+                    <p><strong>🌍 Location:</strong> Germany – Collaboration with Greece</p>
+                    <p><strong>🤝 Specialization:</strong> Collaboration with translation agencies</p>
+                    <p><strong>⏰ Experience:</strong> Professional translator since 2006</p>
+                    
+                    <div class="flags">🇬🇷 🇩🇪 🇬🇧 🇪🇸 🇫🇷 🇮🇹</div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- URL Display -->
+    <div class="url-display">
+        🌐 <strong>takis-translations.github.io</strong>
     </div>
     
     <script>
@@ -385,7 +555,7 @@
             // Add click animation to email button
             const emailBtn = document.querySelector('.email-btn');
             emailBtn.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
+                this.style.transform = 'scale(0.95) translateY(-5px)';
                 setTimeout(() => {
                     this.style.transform = '';
                 }, 150);
